@@ -1,0 +1,77 @@
+@font-face {
+  font-family: Dia;
+  src: url("../assets//fonts/Oferta-do-Dia.ttf");
+}
+
+:root {
+  --background-color: rgb(3, 4, 3);
+  --color: #ffffff;
+  --shadow-color: #1d1914;
+  --font: "Dia", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font) !important;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+h6 {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.main_layout {
+  display: flex;
+}
+
+.mint_page {
+  text-align: center;
+  .header {
+    padding-inline: 15rem;
+  }
+}
+
+.nav_bar {
+  background: rgba(0, 0, 0, 0.334);
+  box-shadow: 0 8px 32px 0 rgba(6, 36, 25, 0.37);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
