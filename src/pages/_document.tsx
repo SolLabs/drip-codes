@@ -15,7 +15,24 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
-        <title>Dragon Masters</title>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="https://drip.haus/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="https://drip.haus/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="https://drip.haus/favicon-16x16.png"
+        />
+        <title>DRIP REDEAM</title>
       </head>
       <body>
         <Main />
