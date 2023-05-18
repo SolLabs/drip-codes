@@ -21,6 +21,7 @@ export default function Home() {
 
   // STATE
   const [code, setCode] = useState("");
+  const [retrievedCode, setRetrievedCode] = useState<string>(null);
 
   const newCode = useCallback(async () => {
     if (code.length < 8 || !wallet.publicKey) return;
@@ -71,14 +72,14 @@ export default function Home() {
           >
             <Image src={images.invite} width={100} height={100} alt="invite" />
             <Typography variant="h4" sx={{ mt: 2 }}>
-              You need an invite code to join 
+              Share or retrieve a{" "}
               <Box component={"span"} color={theme.palette.warning.light}>
                 DRiP
-              </Box>
-              .
+              </Box>{" "}
+              CODE
             </Typography>
 
-            <Box
+            {/* <Box
               component={"div"}
               sx={{
                 textAlign: "center",
@@ -103,14 +104,14 @@ export default function Home() {
                 </Box>
                 No burning.
               </Typography>
-            </Box>
+            </Box> */}
 
-            <Typography variant="h4" sx={{ mt: 2 }}>
+            {/* <Typography variant="h4" sx={{ mt: 2 }}>
               <Box component={"span"} color={theme.palette.warning.light}>
                 DRiP
               </Box>{" "}
               CODE
-            </Typography>
+            </Typography> */}
             <MuiOtpInput
               value={code}
               onChange={setCode}
@@ -135,7 +136,7 @@ export default function Home() {
                 size="large"
                 variant="contained"
                 className="white_button"
-                disabled={code.length !== 8}
+                disabled={!wallet.publicKey || code.length !== 8}
                 onClick={newCode}
               >
                 DRIP THIS
@@ -145,6 +146,7 @@ export default function Home() {
                 variant="contained"
                 className="white_button"
                 onClick={retrive}
+                disabled={!wallet.publicKey}
               >
                 GIMME NEW CODE
               </Button>
@@ -153,35 +155,37 @@ export default function Home() {
         </Card>
       </Grid>
 
-      <Grid item xs={12}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h2" sx={{ mt: 4 }}>
-            YOUR NEW{" "}
-            <Box component={"span"} color={theme.palette.warning.light}>
-              DRiP
-            </Box>{" "}
-            CODE
-          </Typography>
-
-          <Typography
-            variant="h1"
+      {retrievedCode ? (
+        <Grid item xs={12}>
+          <Box
             sx={{
-              mt: 2,
-              color: theme.palette.warning.light,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
             }}
           >
-            &ldquo;5h52jk52l52&ldquo;
-          </Typography>
-        </Box>
-      </Grid>
+            <Typography variant="h2" sx={{ mt: 4 }}>
+              YOUR NEW{" "}
+              <Box component={"span"} color={theme.palette.warning.light}>
+                DRiP
+              </Box>{" "}
+              CODE
+            </Typography>
+
+            <Typography
+              variant="h1"
+              sx={{
+                mt: 2,
+                color: theme.palette.warning.light,
+              }}
+            >
+              &ldquo;{retrievedCode}&ldquo;
+            </Typography>
+          </Box>
+        </Grid>
+      ) : null}
     </Grid>
   );
 }
