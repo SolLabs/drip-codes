@@ -4,19 +4,52 @@ import {
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   Grid,
   Typography,
   useTheme,
 } from "@mui/material";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import Image from "next/image";
-import { useState } from "react";
+import axios from "axios";
+import { useCallback, useState } from "react";
 
 export default function Home() {
+  const wallet = useWallet();
   const theme = useTheme();
-  const [otp, setOtp] = useState("");
+
+  // STATE
+  const [code, setCode] = useState("");
+
+  const newCode = useCallback(async () => {
+    if (code.length < 8 || !wallet.publicKey) return;
+
+    try {
+      const { data } = await axios.post("/api/code/insert", {
+        code,
+        poster: wallet.publicKey.toBase58(),
+      });
+
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [code, wallet.publicKey]);
+
+  const retrive = useCallback(async () => {
+    if (!wallet.publicKey) return;
+
+    try {
+      const { data } = await axios.post("/api/code/retrive", {
+        poster: wallet.publicKey.toBase58(),
+      });
+
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [wallet.publicKey]);
 
   return (
     <Grid
@@ -79,8 +112,8 @@ export default function Home() {
               CODE
             </Typography>
             <MuiOtpInput
-              value={otp}
-              onChange={setOtp}
+              value={code}
+              onChange={setCode}
               length={8}
               autoFocus={true}
               sx={{ my: 3 }}
@@ -92,12 +125,27 @@ export default function Home() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 2,
+                button: {
+                  bgcolor: "white !important",
+                  color: theme.palette.warning.light + " !important",
+                },
               }}
             >
-              <Button size="large" color="warning" variant="outlined">
+              <Button
+                size="large"
+                variant="contained"
+                className="white_button"
+                disabled={code.length !== 8}
+                onClick={newCode}
+              >
                 DRIP THIS
               </Button>
-              <Button size="large" variant="outlined" color="error">
+              <Button
+                size="large"
+                variant="contained"
+                className="white_button"
+                onClick={retrive}
+              >
                 GIMME NEW CODE
               </Button>
             </Box>

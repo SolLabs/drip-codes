@@ -18,6 +18,9 @@ import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode, useMemo } from "react";
 
+// DB CONNECTION
+import "./api/utils/connection";
+
 // styles
 import "@/css/global.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
