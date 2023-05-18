@@ -9,17 +9,18 @@ export default async function insert(req: NextApiRequest, res: NextApiResponse) 
 
         try {
             const newCode = new Code({
-                poster: poster,
-                code: code,
-                is_retrieved: false,
-                retriever: null,
+                poster,
                 discord_id: null,
+                code,
+                retriever: null,
+                is_retrieved: false,
             });
             await newCode.save();
 
             return res.status(200).json({ message: "Code inserted" });
         } catch (err) {
-            return res.status(500).json({ message: err });
+            console.error(err);
+            return res.status(500).json({ message: 'error in inserting', err });
         }
 
     } else {

@@ -21,4 +21,6 @@ const schema = new mongoose.Schema<ICode>(
     { timestamps: true }
 );
 
-export default mongoose.model<ICode>("Code", schema);
+global.Codes = global.Codes || mongoose.model<ICode>('Codes', schema);
+
+export default global.Codes
