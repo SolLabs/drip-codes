@@ -32,7 +32,7 @@ export default function Document() {
           sizes="16x16"
           href="https://drip.haus/favicon-16x16.png"
         />
-        <title>DRIP REDEAM</title>
+        <title>DRIP CODE REDEAM</title>
       </head>
       <body>
         <Main />
