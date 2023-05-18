@@ -8,8 +8,8 @@ export default function Document() {
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="game" />
         <meta property="og:url" content="https://google.com/" />
-        <meta property="og:site_name" content="Drip Code Redeam" />
-        <meta property="og:title" content="Drip Code Redeam" />
+        <meta property="og:site_name" content="Drip Code" />
+        <meta property="og:title" content="Drip Code" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           rel="stylesheet"
@@ -32,7 +32,7 @@ export default function Document() {
           sizes="16x16"
           href="https://drip.haus/favicon-16x16.png"
         />
-        <title>DRIP CODE REDEAM</title>
+        <title>DRIP CODE</title>
       </head>
       <body>
         <Main />

@@ -41,6 +41,8 @@ export default function Home() {
   const retrive = useCallback(async () => {
     if (!wallet.publicKey) return;
 
+    setRetrievedCode("RANDOM_CODE");
+
     try {
       const { data } = await axios.post("/api/code/retrive", {
         poster: wallet.publicKey.toBase58(),
@@ -139,7 +141,7 @@ export default function Home() {
                 disabled={!wallet.publicKey || code.length !== 8}
                 onClick={newCode}
               >
-                DRIP THIS
+                Share Code
               </Button>
               <Button
                 size="large"
@@ -148,7 +150,7 @@ export default function Home() {
                 onClick={retrive}
                 disabled={!wallet.publicKey}
               >
-                GIMME NEW CODE
+                Get a Code
               </Button>
             </Box>
           </CardContent>
