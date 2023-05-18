@@ -8,8 +8,8 @@ export default function Document() {
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="game" />
         <meta property="og:url" content="https://google.com/" />
-        <meta property="og:site_name" content="Dragon Masters" />
-        <meta property="og:title" content="Dragon Masters" />
+        <meta property="og:site_name" content="Drip Code Redeam" />
+        <meta property="og:title" content="Drip Code Redeam" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           rel="stylesheet"
