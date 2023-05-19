@@ -1,7 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import database_connection from "../utils/connection";
 import Code from "../schema/code";
 
 export default async function insert(req: NextApiRequest, res: NextApiResponse) {
+    await database_connection();
+
     if (req.method == "POST") {
         const { code, poster } = req.body;
 
@@ -19,8 +22,7 @@ export default async function insert(req: NextApiRequest, res: NextApiResponse) 
 
             return res.status(200).json({ message: "Code inserted" });
         } catch (err) {
-            console.error(err);
-            return res.status(500).json({ message: 'error in inserting', err });
+            return res.status(500).json({ message: 'Code Already Exists', err });
         }
 
     } else {

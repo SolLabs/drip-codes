@@ -17,12 +17,11 @@ import {
 import { NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode, useMemo } from "react";
-
-// DB CONNECTION
-import "./api/utils/connection";
+import { ToastContainer } from "react-toastify";
 
 // styles
 import "@/css/global.css";
+import "react-toastify/dist/ReactToastify.css";
 import "@solana/wallet-adapter-react-ui/styles.css";
 
 // types
@@ -64,6 +63,15 @@ export default function App({ Component, pageProps }: AppProps & Props) {
         <WalletProvider wallets={wallets}>
           <WalletModalProvider>
             {getLayout(<Component {...pageProps} />)}
+            <ToastContainer
+              theme="dark"
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick={true}
+              rtl={false}
+            />
           </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

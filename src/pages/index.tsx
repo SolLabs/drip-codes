@@ -5,6 +5,7 @@ import {
   Button,
   Card,
   CardContent,
+  CircularProgress,
   Grid,
   Typography,
   useTheme,
@@ -14,44 +15,52 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 import Image from "next/image";
 import axios from "axios";
 import { useCallback, useState } from "react";
+import { toast } from "react-toastify";
+import CodeUI from "@/components/code";
+import { CodeType } from "@/types";
 
 export default function Home() {
   const wallet = useWallet();
   const theme = useTheme();
 
   // STATE
+  const [loading, setLoading] = useState(false);
   const [code, setCode] = useState("");
-  const [retrievedCode, setRetrievedCode] = useState<string>(null);
+  const [retrived, setRetrived] = useState<CodeType | undefined>(undefined);
 
   const newCode = useCallback(async () => {
     if (code.length < 8 || !wallet.publicKey) return;
 
+    setLoading(true);
     try {
-      const { data } = await axios.post("/api/code/insert", {
+      await axios.post("/api/code/insert", {
         code,
         poster: wallet.publicKey.toBase58(),
       });
 
-      console.log(data);
+      toast.success("Code Inserted");
+      setCode("");
     } catch (e) {
-      console.error(e);
+      toast.error(e.response.data.message);
     }
+    setLoading(false);
   }, [code, wallet.publicKey]);
 
   const retrive = useCallback(async () => {
     if (!wallet.publicKey) return;
 
-    setRetrievedCode("RANDOM_CODE");
-
+    setLoading(true);
     try {
       const { data } = await axios.post("/api/code/retrive", {
-        poster: wallet.publicKey.toBase58(),
+        retriver: wallet.publicKey.toBase58(),
       });
 
-      console.log(data);
+      setRetrived(data.code);
+      toast.success("CODE RETRIVED");
     } catch (e) {
-      console.error(e);
+      toast.error(e.response.data.message);
     }
+    setLoading(false);
   }, [wallet.publicKey]);
 
   return (
@@ -74,46 +83,24 @@ export default function Home() {
           >
             <Image src={images.invite} width={100} height={100} alt="invite" />
             <Typography variant="h4" sx={{ mt: 2 }}>
-              Share or retrieve a{" "}
+              You need an invite code to join 
               <Box component={"span"} color={theme.palette.warning.light}>
                 DRiP
-              </Box>{" "}
-              CODE
+              </Box>
+              .
             </Typography>
 
-            {/* <Box
-              component={"div"}
-              sx={{
-                textAlign: "center",
-                mt: 1,
-                py: 2,
-                px: {
-                  xs: 2,
-                  sm: 4,
-                  md: 15,
-                },
-                border: "1px solid" + theme.palette.warning.light,
-              }}
-            >
-              <Typography variant="h5">We only have 2 rules.</Typography>
-              <Typography variant="subtitle1">
-                <Box component={"span"} color={theme.palette.warning.light}>
-                  1.
-                </Box>
-                One account per human. <br />
-                <Box component={"span"} color={theme.palette.warning.light}>
-                  2.
-                </Box>
-                No burning.
-              </Typography>
-            </Box> */}
-
-            {/* <Typography variant="h4" sx={{ mt: 2 }}>
+            <Typography variant="subtitle2" sx={{ mt: 2 }}>
+              It is forbidden and punishable to have multiple accounts on{" "}
               <Box component={"span"} color={theme.palette.warning.light}>
-                DRiP
+                drip.haus
+              </Box>
+              , any double account will be found by the team of{" "}
+              <Box component={"span"} color={theme.palette.warning.light}>
+                drip.haus
               </Box>{" "}
-              CODE
-            </Typography> */}
+              and will be banned.
+            </Typography>
             <MuiOtpInput
               value={code}
               onChange={setCode}
@@ -130,64 +117,53 @@ export default function Home() {
                 gap: 2,
                 button: {
                   bgcolor: "white !important",
-                  color: theme.palette.warning.light + " !important",
+                  color: "black !important",
+                  ":disabled": {
+                    bgcolor: "grey !important",
+                  },
                 },
               }}
             >
               <Button
                 size="large"
                 variant="contained"
-                className="white_button"
-                disabled={!wallet.publicKey || code.length !== 8}
+                disabled={code.length !== 8 || loading}
                 onClick={newCode}
               >
-                Share Code
+                {loading ? (
+                  <CircularProgress
+                    variant="indeterminate"
+                    color="warning"
+                    size={20}
+                  />
+                ) : (
+                  "DRIP THIS"
+                )}
               </Button>
               <Button
                 size="large"
                 variant="contained"
-                className="white_button"
                 onClick={retrive}
-                disabled={!wallet.publicKey}
+                disabled={!wallet.publicKey || !!retrived || loading}
               >
-                Get a Code
+                {loading ? (
+                  <CircularProgress
+                    variant="indeterminate"
+                    color="warning"
+                    size={20}
+                  />
+                ) : (
+                  "GIMME NEW CODE"
+                )}
               </Button>
             </Box>
           </CardContent>
         </Card>
       </Grid>
 
-      {retrievedCode ? (
-        <Grid item xs={12}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h2" sx={{ mt: 4 }}>
-              YOUR NEW{" "}
-              <Box component={"span"} color={theme.palette.warning.light}>
-                DRiP
-              </Box>{" "}
-              CODE
-            </Typography>
-
-            <Typography
-              variant="h1"
-              sx={{
-                mt: 2,
-                color: theme.palette.warning.light,
-              }}
-            >
-              &ldquo;{retrievedCode}&ldquo;
-            </Typography>
-          </Box>
-        </Grid>
-      ) : null}
+      <Grid item xs={12}>
+        {retrived && <CodeUI data={retrived} setData={setRetrived} />}
+      </Grid>
     </Grid>
   );
 }
