@@ -3,6 +3,7 @@ import { Box, CssBaseline, Toolbar, useTheme } from "@mui/material";
 
 // COMPONENTS
 import Header from "./header";
+import Footer from "./footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const theme = useTheme();
@@ -22,6 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {children}
         </Box>
       </Box>
+      <Footer />
     </>
   );
 }

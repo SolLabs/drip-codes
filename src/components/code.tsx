@@ -1,5 +1,5 @@
 import { CodeType } from "@/types";
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
 import axios from "axios";
 import { useCallback, useState } from "react";
@@ -47,75 +47,77 @@ export default function CodeUI({
   );
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-      }}
-    >
-      <Typography variant="h2" sx={{ mt: 4 }}>
-        YOUR NEW{" "}
-        <Box component={"span"} color={theme.palette.warning.light}>
-          DRiP
-        </Box>{" "}
-        CODE
-      </Typography>
-
-      <Typography
-        variant="h1"
-        sx={{
-          mt: 2,
-          color: theme.palette.warning.light,
-        }}
-      >
-        &ldquo;{data.code}&ldquo;
-      </Typography>
-
-      <Typography
-        variant="h4"
-        sx={{
-          my: 2.5,
-        }}
-      >
-        Did it{" "}
-        <Box component={"span"} color={theme.palette.warning.light}>
-          Work?
-        </Box>{" "}
-      </Typography>
+    <Grid item xs={12}>
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 2,
+          textAlign: "center",
         }}
       >
-        <Button
-          size="small"
-          variant="outlined"
-          color="warning"
-          disabled={loading}
-          onClick={() => feedback(true)}
-        >
-          Yes
-        </Button>
-        <Button
-          size="small"
-          variant="outlined"
+        <Typography variant="h2" sx={{ mt: 4 }}>
+          YOUR NEW{" "}
+          <Box component={"span"} color={theme.palette.warning.light}>
+            DRiP
+          </Box>{" "}
+          CODE
+        </Typography>
+
+        <Typography
+          variant="h1"
           sx={{
-            border: "1px solid white !important",
-            color: "white !important",
+            mt: 2,
+            color: theme.palette.warning.light,
           }}
-          disabled={loading}
-          onClick={() => feedback(false)}
         >
-          No
-        </Button>
+          &ldquo;{data.code}&ldquo;
+        </Typography>
+
+        <Typography
+          variant="h4"
+          sx={{
+            my: 2.5,
+          }}
+        >
+          Did it{" "}
+          <Box component={"span"} color={theme.palette.warning.light}>
+            Work?
+          </Box>{" "}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 2,
+          }}
+        >
+          <Button
+            size="small"
+            variant="outlined"
+            color="warning"
+            disabled={loading}
+            onClick={() => feedback(true)}
+          >
+            Yes
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            sx={{
+              border: "1px solid white !important",
+              color: "white !important",
+            }}
+            disabled={loading}
+            onClick={() => feedback(false)}
+          >
+            No
+          </Button>
+        </Box>
       </Box>
-    </Box>
+    </Grid>
   );
 }

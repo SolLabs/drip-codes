@@ -18,6 +18,7 @@ import { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import CodeUI from "@/components/code";
 import { CodeType } from "@/types";
+import Messages from "@/components/messages";
 
 export default function Home() {
   const wallet = useWallet();
@@ -66,11 +67,12 @@ export default function Home() {
   return (
     <Grid
       container
+      spacing={2}
       alignItems={"center"}
       justifyContent={"center"}
       sx={{ my: 3 }}
     >
-      <Grid item xs={12} sm={10} md={8} lg={6}>
+      <Grid item xs={12} sm={10} md={8} lg={8}>
         <Card elevation={2}>
           <CardContent
             sx={{
@@ -83,7 +85,7 @@ export default function Home() {
           >
             <Image src={images.invite} width={100} height={100} alt="invite" />
             <Typography variant="h4" sx={{ mt: 2 }}>
-              You need an invite code to join 
+              You need an invite code to join{" "}
               <Box component={"span"} color={theme.palette.warning.light}>
                 DRiP
               </Box>
@@ -161,8 +163,31 @@ export default function Home() {
         </Card>
       </Grid>
 
-      <Grid item xs={12}>
-        {retrived && <CodeUI data={retrived} setData={setRetrived} />}
+      <Grid
+        container
+        item
+        xs={12}
+        spacing={2}
+        alignItems={"center"}
+        justifyContent={"center"}
+        sx={{
+          ".warning_card": {
+            p: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+          ".card_content": {
+            textAlign: "center",
+          },
+        }}
+      >
+        {retrived ? (
+          <CodeUI data={retrived} setData={setRetrived} />
+        ) : (
+          <Messages />
+        )}
       </Grid>
     </Grid>
   );
