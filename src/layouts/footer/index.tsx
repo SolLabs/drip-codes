@@ -3,7 +3,7 @@ import { AppBar, Box, Typography, useTheme } from "@mui/material";
 const teamMembers = [
   {
     twitter: "s0ldev",
-    wallet: "s0ldev",
+    wallet: "232Z5QNvQ4wRyraGWFpC5i3HEbqozEWgBCV95eWASaG1",
   },
   {
     twitter: "_RockstarSB",
@@ -22,18 +22,24 @@ export default function Footer() {
         top: "auto",
         bottom: 0,
         width: "100%",
-        bgcolor: theme.palette.background.default,
+        // bgcolor: theme.palette.background.default,
+        bgcolor: "transparent",
       }}
     >
-      <Typography variant="subtitle2">
+      <Typography
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        variant="subtitle2"
+      >
+        <Box sx={{ fontWeight: "bold" }}>Made with heart by:</Box>
         <Box
           style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(${teamMembers.length}, 1fr)`,
+            display: "flex",
+            gap: "1rem",
+            justifyContent: "center",
           }}
         >
           {teamMembers.map((member, index) => (
-            <Box key={index} sx={{ gridRow: "1", gridColumn: `${index + 1}` }}>
+            <Box key={index}>
               <Box
                 component={"a"}
                 href={`https://twitter.com/${member.twitter}`}
@@ -50,16 +56,8 @@ export default function Footer() {
               <Box>{member.wallet}</Box>
             </Box>
           ))}
-          <Box
-            sx={{
-              gridRow: "2",
-              gridColumn: `1/span ${teamMembers.length}`,
-              textAlign: "center",
-            }}
-          >
-            Buy us a coffee
-          </Box>
         </Box>
+        <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box>
       </Typography>
     </AppBar>
   );
