@@ -77,89 +77,8 @@ export default function Home() {
           <Messages />
         )}
       </Grid>
-
-      <Grid item xs={12}>
-        <Typography
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-          variant="subtitle2"
-        >
-          <Box sx={{ fontWeight: "bold" }}>Made with heart by:</Box>
-          <Box
-            style={{
-              display: "flex",
-              gap: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            {teamMembers.map((member, index) => (
-              <Box key={index}>
-                <Box
-                  component={"a"}
-                  href={`https://twitter.com/${member.twitter}`}
-                  target="_blank"
-                >
-                  <Typography
-                    variant="subtitle2"
-                    component={"span"}
-                    color="primary"
-                  >
-                    @{member.twitter}
-                  </Typography>
-                </Box>
-                <Box>{member.wallet}</Box>
-              </Box>
-            ))}
-          </Box>
-          <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box>
-        </Typography>
-      </Grid>
     </Grid>
   );
-
-  // return (
-  //   <Grid
-  //     container
-  //     spacing={2}
-  //     alignItems={"center"}
-  //     justifyContent={"center"}
-  //     sx={{ my: 3 }}
-  //   >
-  //     <Grid item xs={12} sm={10} md={8} lg={8}>
-  //       <Hero retrieved={retrived} setRetrieved={setRetrived} />
-  //     </Grid>
-
-  //     <Grid
-  //       container
-  //       item
-  //       xs={12}
-  //       spacing={2}
-  //       alignItems={"center"}
-  //       justifyContent={"center"}
-  //       sx={{
-  //         ".warning_card": {
-  //           p: 2,
-  //           display: "flex",
-  //           flexDirection: "column",
-  //           alignItems: "center",
-  //           justifyContent: "center",
-  //         },
-  //         ".card_content": {
-  //           textAlign: "center",
-  //         },
-  //       }}
-  //     >
-  //       {retrived ? (
-  //         <CodeUI data={retrived} setData={setRetrived} />
-  //       ) : (
-  //         <Messages />
-  //       )}
-  //     </Grid>
-  //   </Grid>
-  // );
 }
 
 // Layout component

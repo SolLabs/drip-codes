@@ -1,4 +1,8 @@
-import { AppBar, Box, Typography, useTheme } from "@mui/material";
+import { AppBar, Box, Grid, Typography, useTheme } from "@mui/material";
+
+// ASSETS
+import TwitterIcon from "@mui/icons-material/Twitter";
+import { FaWallet } from "react-icons/fa";
 
 const teamMembers = [
   {
@@ -17,29 +21,37 @@ export default function Footer() {
     <AppBar
       position="fixed"
       component="footer"
+      color="default"
       sx={{
         p: 2,
-        top: "auto",
         bottom: 0,
-        width: "100%",
-        // bgcolor: theme.palette.background.default,
-        bgcolor: "transparent",
+        top: "auto",
+        bgcolor: theme.palette.background.default + "!important",
       }}
     >
-      <Typography
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-        variant="subtitle2"
+      <Grid
+        container
+        spacing={2}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
       >
-        <Box sx={{ fontWeight: "bold" }}>Made with heart by:</Box>
-        <Box
-          style={{
-            display: "flex",
-            gap: "1rem",
-            justifyContent: "center",
-          }}
-        >
-          {teamMembers.map((member, index) => (
-            <Box key={index}>
+        {teamMembers.map((member, index) => (
+          <>
+            <Grid
+              item
+              xs={4}
+              key={index}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: index === 1 ? "flex-end" : "flex-start",
+                justifyContent: "center",
+              }}
+            >
               <Box
                 component={"a"}
                 href={`https://twitter.com/${member.twitter}`}
@@ -47,18 +59,52 @@ export default function Footer() {
               >
                 <Typography
                   variant="subtitle2"
-                  component={"span"}
-                  color="primary"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
+                  <TwitterIcon
+                    fontSize={"small"}
+                    sx={{
+                      mx: 1,
+                      color: theme.palette.warning.light + "!important",
+                    }}
+                  />{" "}
                   @{member.twitter}
                 </Typography>
               </Box>
-              <Box>{member.wallet}</Box>
-            </Box>
-          ))}
-        </Box>
-        <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box>
-      </Typography>
+              <Typography
+                variant="subtitle2"
+                component={"span"}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  "svg, .MuiSvgIcon-root": {
+                    color: theme.palette.warning.light + "!important",
+                  },
+                }}
+              >
+                <FaWallet style={{ marginInline: 10 }} />
+                {member.wallet}
+              </Typography>
+            </Grid>
+            {index === 0 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  mt: 2,
+                }}
+              >
+                <Box sx={{ fontWeight: "bold" }}>Made with heart ❤️</Box>
+                <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box>
+              </Box>
+            )}
+          </>
+        ))}
+      </Grid>
     </AppBar>
   );
 }

@@ -12,9 +12,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Header />
-        {/* <Box component="nav">
-          <Anchor toggle={toggle} setToggle={setToggle} />
-        </Box> */}
         <Box
           component="main"
           sx={{ background: theme.palette.background.default, p: 2 }}
@@ -23,7 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {children}
         </Box>
       </Box>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
