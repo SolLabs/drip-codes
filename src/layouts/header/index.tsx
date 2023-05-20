@@ -39,9 +39,9 @@ export default function Header() {
                 {" "}
                 <PublicIcon sx={{ mx: 2 }} />
               </a>
-              <a target="_blank" href="https://drip.haus/">
+              <a target="_blank" href="https://github.com/SolLabs/drip-codes">
                 {" "}
-                <FaGithub size={25} />
+                <FaGithub size={25} style={{ marginRight: 20 }} />
               </a>
               <WalletMultiButton />
             </Box>
