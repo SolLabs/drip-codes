@@ -10,6 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import axios from "axios";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import Image from "next/image";
@@ -106,38 +107,44 @@ export default function Hero({
             },
           }}
         >
-          <Button
-            size="large"
-            variant="contained"
-            disabled={code.length !== 8 || loading}
-            onClick={newCode}
-          >
-            {loading ? (
-              <CircularProgress
-                variant="indeterminate"
-                color="warning"
-                size={20}
-              />
-            ) : (
-              "DRIP THIS"
-            )}
-          </Button>
-          <Button
-            size="large"
-            variant="contained"
-            onClick={retrive}
-            disabled={!wallet.publicKey || !!retrieved || loading}
-          >
-            {loading ? (
-              <CircularProgress
-                variant="indeterminate"
-                color="warning"
-                size={20}
-              />
-            ) : (
-              "GIMME NEW CODE"
-            )}
-          </Button>
+          {!wallet.publicKey ? (
+            <WalletMultiButton />
+          ) : (
+            <>
+              <Button
+                size="large"
+                variant="contained"
+                disabled={code.length !== 8 || loading}
+                onClick={newCode}
+              >
+                {loading ? (
+                  <CircularProgress
+                    variant="indeterminate"
+                    color="warning"
+                    size={20}
+                  />
+                ) : (
+                  "DRIP THIS"
+                )}
+              </Button>
+              <Button
+                size="large"
+                variant="contained"
+                onClick={retrive}
+                disabled={!wallet.publicKey || !!retrieved || loading}
+              >
+                {loading ? (
+                  <CircularProgress
+                    variant="indeterminate"
+                    color="warning"
+                    size={20}
+                  />
+                ) : (
+                  "GIMME NEW CODE"
+                )}
+              </Button>
+            </>
+          )}
         </Box>
       </CardContent>
     </Card>

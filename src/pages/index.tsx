@@ -20,6 +20,7 @@ import CodeUI from "@/components/code";
 import { CodeType } from "@/types";
 import Messages from "@/components/messages";
 import Hero from "@/components/hero";
+import { FaGithub } from "react-icons/fa";
 
 const teamMembers = [
   {
@@ -116,6 +117,12 @@ export default function Home() {
                 {/* <Box>{member.wallet}</Box> */}
               </Box>
             ))}
+          </Box>
+          <Box>
+            <a target="_blank" href="https://github.com/SolLabs/drip-codes">
+              {" "}
+              <FaGithub size={25} style={{ marginTop: 10 }} />
+            </a>
           </Box>
           {/* <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box> */}
         </Typography>

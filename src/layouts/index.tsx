@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <Header />
+        {/* <Header /> */}
         <Box
           component="main"
           sx={{ background: theme.palette.background.default, p: 2 }}
