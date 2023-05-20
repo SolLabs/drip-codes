@@ -30,6 +30,9 @@ const teamMembers = [
     twitter: "_RockstarSB",
     wallet: "rockstar_sb.sol",
   },
+  {
+    twitter: "DoctorBridal",
+  },
 ];
 
 export default function Home() {
@@ -76,6 +79,46 @@ export default function Home() {
         ) : (
           <Messages />
         )}
+      </Grid>
+
+      <Grid item xs={12}>
+        <Typography
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+          variant="subtitle2"
+        >
+          <Box sx={{ fontWeight: "bold" }}>Made with heart by:</Box>
+          <Box
+            style={{
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+            }}
+          >
+            {teamMembers.map((member, index) => (
+              <Box key={index}>
+                <Box
+                  component={"a"}
+                  href={`https://twitter.com/${member.twitter}`}
+                  target="_blank"
+                >
+                  <Typography
+                    variant="subtitle2"
+                    component={"span"}
+                    color="primary"
+                  >
+                    @{member.twitter}
+                  </Typography>
+                </Box>
+                {/* <Box>{member.wallet}</Box> */}
+              </Box>
+            ))}
+          </Box>
+          {/* <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box> */}
+        </Typography>
       </Grid>
     </Grid>
   );
