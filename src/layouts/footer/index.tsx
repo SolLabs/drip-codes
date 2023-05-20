@@ -99,7 +99,7 @@ export default function Footer() {
                 }}
               >
                 <Box sx={{ fontWeight: "bold" }}>Made with heart ❤️</Box>
-                <Box sx={{ fontWeight: "bold" }}>Buy us a coffe :)</Box>
+                <Box sx={{ fontWeight: "bold" }}>Buy us a coffee ☕️</Box>
               </Box>
             )}
           </>
