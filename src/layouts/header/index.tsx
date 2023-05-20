@@ -6,7 +6,7 @@ import Image from "next/image";
 // ASSETS
 import PublicIcon from "@mui/icons-material/Public";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaGithub } from "react-icons/fa";
 
 export default function Header() {
   return (
@@ -35,9 +35,13 @@ export default function Header() {
                 {" "}
                 <TwitterIcon sx={{ ml: 2.5 }} />
               </a>
-              <a target="_blank" href="https://drip.haus/vault">
+              <a target="_blank" href="https://drip.haus/">
                 {" "}
                 <PublicIcon sx={{ mx: 2 }} />
+              </a>
+              <a target="_blank" href="https://drip.haus/">
+                {" "}
+                <FaGithub size={25} />
               </a>
               <WalletMultiButton />
             </Box>
